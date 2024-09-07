@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Todoist\WebhookManagement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -19,8 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/todoist', function (Request $request) {
-    
-    $content = $request->event_name;
-    Storage::put('requests.txt', $content);
-});
+Route::post('/todoist', [WebhookManagement::class, 'process']);
