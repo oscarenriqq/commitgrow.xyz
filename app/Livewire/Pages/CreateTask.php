@@ -49,7 +49,7 @@ class CreateTask extends Component
 
             //Agregar rachas
             $streaks = [];
-            $totalDays = $createdTask->totalDays();
+            $totalDays = $createdTask->getTotalDays();
 
             $currentDate = Carbon::now();
             

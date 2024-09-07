@@ -26,14 +26,14 @@ class Dashboard extends Component
     }
 
     public function getBgColor($day, $completed) {
-        $bgColor = '';
+        $bgColor = 'bg-gray-400';
 
         if ($this->now->isSameDay($day)) {
-            $bgColor = $completed ? 'bg-green-500' : 'bg-gray-200';
+            $bgColor = $completed ? 'bg-green-500' : 'bg-gray-400';
         } elseif ($this->now > $day) {
             $bgColor = $completed ? 'bg-green-500' : 'bg-red-500';
         } elseif ($this->now < $day) {
-            $bgColor = $completed ? 'bg-green-500' : 'bg-gray-200';
+            $bgColor = $completed ? 'bg-green-500' : 'bg-gray-400';
         }
 
         return $bgColor;
@@ -72,17 +72,17 @@ class Dashboard extends Component
                                         ->get();
             }
 
-            if (isset($this->streaks)) {
+            if ($this->streaks) {
                 $completedDays = $this->streaks->filter(function($streak) {
                     return $streak->completed;
                 })->count();
+                $this->percentageCompleted = $this->task->getPercentageCompleted($completedDays);
+                $this->calculateStreaks();
             }
             else {
                 $completedDays = 0;
             }
 
-            $this->percentageCompleted = $this->task->getPercentageCompleted($completedDays);
-            $this->calculateStreaks();
         }
 
         return view('livewire.pages.dashboard');

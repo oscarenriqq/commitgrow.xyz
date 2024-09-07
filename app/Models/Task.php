@@ -38,6 +38,8 @@ class Task extends Model
     public function getPercentageCompleted($completedDays) {
         if ($this->getDaysFromStart() == 0 && $completedDays == 1){
             return 100;
+        } else if($this->getDaysFromStart() == 0 && $completedDays == 0) {
+            return 0;
         }
 
         $percentage = ($completedDays / $this->getDaysFromStart()) * 100;
