@@ -72,7 +72,7 @@ class Dashboard extends Component
                                         ->get();
             }
 
-            if ($this->streaks->count() > 0) {
+            if (isset($this->streaks)) {
                 $completedDays = $this->streaks->filter(function($streak) {
                     return $streak->completed;
                 })->count();
