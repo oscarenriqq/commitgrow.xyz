@@ -1,13 +1,3 @@
-{{-- <x-slot name="header">
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        {{ __('Dashboard') }}
-    </h2>
-</x-slot> --}}
-@php
-    $biggestStreak = 0;
-    $biggestStreakArr = [];
-@endphp
-
 <div>
     @if (session()->has('error'))
         <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 2000)" x-show="show"
@@ -34,7 +24,8 @@
                     @foreach ($streaks as $streak)
                         <div class="flex flex-col items-center">
                             <span
-                                class="w-8 h-8 {{ $this->getBgColor($streak->day, $streak->completed) }} rounded-full"></span>
+                                class="w-8 h-8 {{ $this->getBgColor($streak->day, $streak->completed) }} rounded-full">
+                            </span>
                             <p class="text-center text-xs">{{ $streak->day_formatted }}</p>
                         </div>
                     @endforeach

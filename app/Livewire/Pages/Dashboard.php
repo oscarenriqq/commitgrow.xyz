@@ -28,12 +28,14 @@ class Dashboard extends Component
     public function getBgColor($day, $completed) {
         $bgColor = 'bg-gray-400';
 
+        $day = Carbon::parse($day);
+
         if ($this->now->isSameDay($day)) {
-            $bgColor = $completed ? 'bg-green-500' : 'bg-gray-400';
-        } elseif ($this->now > $day) {
+            $bgColor = $completed ? 'bg-green-500' : 'bg-gray-200';
+        } elseif ($this->now->greaterThan($day)) {
             $bgColor = $completed ? 'bg-green-500' : 'bg-red-500';
-        } elseif ($this->now < $day) {
-            $bgColor = $completed ? 'bg-green-500' : 'bg-gray-400';
+        } elseif ($this->now->lessThan($day)) {
+            $bgColor = $completed ? 'bg-green-500' : 'bg-gray-200';
         }
 
         return $bgColor;
