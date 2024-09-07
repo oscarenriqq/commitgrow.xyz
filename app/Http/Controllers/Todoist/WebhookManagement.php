@@ -18,7 +18,7 @@ class WebhookManagement extends Controller
     
     public function process(Request $request) {
 
-        Storage::append('testing_webhook.txt', $request->all());
+        Storage::append('testing_webhook.txt', json_encode($request->all()));
         abort(200);
 
         $validator = Validator::make($request->all(), [
