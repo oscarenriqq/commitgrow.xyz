@@ -72,9 +72,14 @@ class Dashboard extends Component
                                         ->get();
             }
 
-            $completedDays = $this->streaks->filter(function($streak) {
-                return $streak->completed;
-            })->count();
+            if ($this->streaks->count() > 0) {
+                $completedDays = $this->streaks->filter(function($streak) {
+                    return $streak->completed;
+                })->count();
+            }
+            else {
+                $completedDays = 0;
+            }
 
             $this->percentageCompleted = $this->task->getPercentageCompleted($completedDays);
             $this->calculateStreaks();

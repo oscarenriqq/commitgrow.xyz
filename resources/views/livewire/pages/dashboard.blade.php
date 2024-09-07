@@ -56,7 +56,7 @@
         @endif
     @else
         <a href="https://todoist.com/oauth/authorize?client_id={{ config('app.todoist_client_id') }}&scope=data:read_write&state=1234567890"
-            class="link" target="_blank">
+            class="link">
             Conectar con todoist
         </a>
     @endif
