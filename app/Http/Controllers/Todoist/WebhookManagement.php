@@ -35,13 +35,15 @@ class WebhookManagement extends Controller
         $eventData = $request->event_data;
         $taskId = $eventData['id'];
 
-        if ($eventName == 'item:updated') {
-            $this->updateTask($taskId);
+        
+
+        if ($eventName == 'item:completed') {
+            $this->completeTask($taskId);
         }
 
     }
 
-    public function updateTask($taskId) {
+    public function completeTask($taskId) {
         $streak = Streak::where('task_id', $taskId)
                         ->where('day', $this->today)
                         ->first();
