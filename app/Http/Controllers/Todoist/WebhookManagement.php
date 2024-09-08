@@ -37,7 +37,7 @@ class WebhookManagement extends Controller
         $updatedAt = $request->updated_at;
         $taskId = $eventData['id'];
         
-        Storage::put('data.txt', json_encode([
+        Storage::append('data.txt', json_encode([
             'task_id' => $taskId,
             'updated_at' => $updatedAt,
             'event_name' => $eventName,
