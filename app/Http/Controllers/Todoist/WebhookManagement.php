@@ -23,7 +23,6 @@ class WebhookManagement extends Controller
         $validator = Validator::make($request->all(), [
             'event_name' => 'required',
             'event_data' => 'required',
-            'updated_at' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -33,16 +32,9 @@ class WebhookManagement extends Controller
 
         $eventName = $request->event_name;
         $eventData = $request->event_data;
-        $updatedAt = $request->updated_at;
+        $updatedAt = Carbon::parse($eventData['updated_at'])->toDateString();
         $taskId = $eventData['id'];
         
-        // Storage::append('data.txt', json_encode([
-        //     'task_id' => $taskId,
-        //     'updated_at' => $updatedAt,
-        //     'event_name' => $eventName,
-        //     'event_data' => $eventData
-        // ]));
-
         if ($eventName == 'item:completed') {
             $this->completeTask($taskId, $updatedAt);
         }
@@ -50,7 +42,7 @@ class WebhookManagement extends Controller
 
     public function completeTask($taskId, $updatedAt) {
         $streak = Streak::where('task_id', $taskId)
-                        ->where('day', Carbon::parse($updatedAt)->toDateString())
+                        ->where('day', $updatedAt)
                         ->first();
 
         $streak->completed = 1;
