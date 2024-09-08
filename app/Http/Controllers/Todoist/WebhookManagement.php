@@ -34,12 +34,12 @@ class WebhookManagement extends Controller
         $updatedAt = $request->updated_at;
         $taskId = $eventData['id'];
         
-        Storage::append('data.txt', json_encode([
-            'task_id' => $taskId,
-            'updated_at' => $updatedAt,
-            'event_name' => $eventName,
-            'event_data' => $eventData
-        ]));
+        // Storage::append('data.txt', json_encode([
+        //     'task_id' => $taskId,
+        //     'updated_at' => $updatedAt,
+        //     'event_name' => $eventName,
+        //     'event_data' => $eventData
+        // ]));
 
         if ($eventName == 'item:completed') {
             $this->completeTask($taskId, $updatedAt);
