@@ -25,7 +25,7 @@ class WebhookManagement extends Controller
         ]);
 
         if ($validator->fails()) {
-            Storage::append('webhook_log.txt', $validator->errors()->messages());
+            Storage::append('webhook_log.txt', json_encode($validator->errors()->messages()));
             abort(400);
         }
 
