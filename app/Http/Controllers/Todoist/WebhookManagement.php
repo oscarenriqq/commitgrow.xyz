@@ -36,6 +36,13 @@ class WebhookManagement extends Controller
         $eventData = $request->event_data;
         $updatedAt = $request->updated_at;
         $taskId = $eventData['id'];
+        
+        Storage::put('data.txt', json_encode([
+            'task_id' => $taskId,
+            'updated_at' => $updatedAt,
+            'event_name' => $eventName,
+            'event_data' => $eventData
+        ]));
 
         if ($eventName == 'item:completed') {
             $this->completeTask($taskId, $updatedAt);
@@ -44,7 +51,7 @@ class WebhookManagement extends Controller
 
     public function completeTask($taskId, $updatedAt) {
         $streak = Streak::where('task_id', $taskId)
-                        ->where('day', Carbon::parse($updatedAt))
+                        ->where('day', Carbon::parse($updatedAt)->toDateString())
                         ->first();
 
         $streak->completed = 1;
