@@ -51,10 +51,10 @@ class CreateTask extends Component
             $streaks = [];
             $totalDays = $createdTask->getTotalDays();
 
-            $currentDate = Carbon::now();
+            $currentDate = Carbon::now()->startOfDay(); 
             
             for($i = 0; $i <= $totalDays; $i++) {
-                $curDate = $i == 0 ? $currentDate->copy() : $currentDate->copy()->addDays($i);
+                $curDate = $i == 0 ? $currentDate : $currentDate->addDay();
                 $streaks[] = [
                     'user_id' => auth()->user()->id, 
                     'task_id' => $todoistCreatedTask['id'], 
