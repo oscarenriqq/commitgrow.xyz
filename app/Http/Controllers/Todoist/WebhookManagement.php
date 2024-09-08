@@ -18,6 +18,8 @@ class WebhookManagement extends Controller
     
     public function process(Request $request) {
 
+        Storage::append('request'.time().'.json', json_encode($request->all()). '\n');
+
         $validator = Validator::make($request->all(), [
             'event_name' => 'required',
             'event_data' => 'required',
