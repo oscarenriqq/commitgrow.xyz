@@ -30,7 +30,7 @@ class Task extends Model
 
     public function getDaysFromStart() {
         $now = Carbon::now();
-        $createdAt = Carbon::parse($this->created_at);
+        $createdAt = Carbon::parse($this->created_at)->subDay();
 
         return $createdAt->diffInDays($now);
     }

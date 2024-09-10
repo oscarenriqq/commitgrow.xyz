@@ -20,6 +20,7 @@ class Dashboard extends Component
     public $streaks= [];
     public $biggestStreak = 0;
     public $percentageCompleted = 0;
+    public $isFinish = false;
 
     public function mount() {
         $this->now = Carbon::now();
@@ -75,9 +76,13 @@ class Dashboard extends Component
             }
 
             if ($this->streaks) {
+
+                $isFinish = $this->streaks->max('day') == $this->now->toDateString();
+
                 $completedDays = $this->streaks->filter(function($streak) {
                     return $streak->completed;
                 })->count();
+                
                 $this->percentageCompleted = $this->task->getPercentageCompleted($completedDays);
                 $this->calculateStreaks();
             }
