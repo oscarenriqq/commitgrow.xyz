@@ -4,6 +4,6 @@
 
 @layer base {
     a[role="button"], button {
-        @apply rounded-md px-10 py-2 font-bold bg-[#FFBF78];
+        @apply rounded-md px-10 py-2 font-bold block text-center bg-[#FFBF78];
     }
 }

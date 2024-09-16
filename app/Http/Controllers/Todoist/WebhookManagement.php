@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Todoist;
 
 use App\Http\Controllers\Controller;
 use App\Models\Streak;
+use App\Models\Task;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -47,5 +48,16 @@ class WebhookManagement extends Controller
 
         $streak->completed = 1;
         $streak->save();
+
+        //Verify if task is completed
+        $task = Task::where('task_id', $taskId)->first();
+
+        $dueDate = Carbon::parse($task->due_date)->toDateString();
+
+        if ($dueDate == $updatedAt) {
+            $task->completed = 1;
+            $task->save();
+        }
+
     }
 }

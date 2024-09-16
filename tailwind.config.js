@@ -12,6 +12,8 @@ export default {
         'bg-green-500',
         'bg-red-500',
         'bg-gray-200',
+        'flex',
+        'flex-col'
     ],
     theme: {
         extend: {

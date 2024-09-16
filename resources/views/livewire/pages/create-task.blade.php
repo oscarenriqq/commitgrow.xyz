@@ -4,7 +4,7 @@
             <label class="block">
                 <span class="text-gray-700">¿Qué hábito deseas trabajar?</span>
                 <input type="text"
-                    class="mt-1 block w-1/2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full lg:w-1/2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     placeholder="Nombre del hábito" wire:model="name">
                 <div>
                     @error('name')
@@ -15,7 +15,7 @@
             <label class="block">
                 <span class="text-gray-700">¿Cual es tu meta?</span>
                 <input type="text"
-                    class="mt-1 block w-1/2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full lg:w-1/2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     placeholder="Detalla tu objetivo" wire:model="description">
                 <div>
                     @error('description')
@@ -26,7 +26,7 @@
             <label class="block">
                 <span class="text-gray-700">Fecha de finalización</span>
                 <input type="date"
-                    class="mt-1 block w-1/2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full lg:w-1/2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     placeholder="Nombre de la tarea" wire:model="due_date" min="{{ now()->format('Y-m-d') }}">
                 <div>
                     @error('due_date')

@@ -18,28 +18,23 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen">
         @include('layouts.navigation')
 
-        <!-- Page Heading -->
-        @if (isset($header))
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
-        @endif
-
         <!-- Page Content -->
-        <main>
+        <main class="bg-white">
             <div class="py-12">
-                <div class="max-w-7xl mx-auto px-4 lg:px-8">
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                        {{ $slot }}
-                    </div>
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    {{ $slot }}
                 </div>
             </div>
         </main>
+        <footer class="bg-gray-100 border-t border-gray-200 py-6 text-center">
+            <p class="text-sm lg:text-lg text-gray-600">
+                CommitGrow es una aplicación de <a href="https://github.com/oscarenriqq/commitgrow.xyz" target="_blank"
+                    class="underline font-bold">código abierto.</a>
+            </p>
+        </footer>
     </div>
     @livewireScripts
 </body>
