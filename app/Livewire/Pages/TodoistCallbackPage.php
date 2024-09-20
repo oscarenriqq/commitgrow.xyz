@@ -21,12 +21,13 @@ class TodoistCallbackPage extends Component
     {
         $accessToken = auth()->user()->todoist_access_token;
 
-        if (!isset($accessToken)) {
+        if (is_null($accessToken)) {
             $response = Http::post('https://todoist.com/oauth/access_token', [
                 'client_id' => config('app.todoist_client_id'),
                 'client_secret' => config('app.todoist_client_secret'),
                 'code' => $this->code
             ])->json();
+
     
             $currentUser = auth()->user();
     
@@ -36,7 +37,6 @@ class TodoistCallbackPage extends Component
     
             return $this->redirect('todoist-callback');
         }
-
-        return $this->redirect(url: '/dashboard', navigate: true);
+        return $this->redirect(url: 'dashboard');
     }
 }
