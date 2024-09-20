@@ -19,6 +19,7 @@ class CreateTask extends Component
     public $description;
     #[Validate('required', message:'Fecha de finalización es obligatoria.')]
     public $due_date;
+    public $supervisor;
 
     public function save() {
 
@@ -44,7 +45,8 @@ class CreateTask extends Component
                 'due_date'=> $this->due_date,
                 'completed'=> false,
                 'task_id' => $todoistCreatedTask['id'],
-                'user_id' => auth()->user()->id
+                'user_id' => auth()->user()->id,
+                'supervisor' => $this->supervisor ?? null
             ]);
 
             //Agregar rachas

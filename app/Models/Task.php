@@ -5,6 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Task extends Model
 {
@@ -18,8 +19,22 @@ class Task extends Model
         'due_date',
         'completed',
         'task_id',
-        'user_id'
+        'user_id',
+        'supervisor',
+        'uuid'
     ];
+
+    protected $hidden = [
+        'uuid'
+    ];
+
+    protected static function boot() {
+        parent::boot();
+
+        static::creating(function($model) {
+            $model->uuid = Str::uuid()->toString();
+        });
+    }
 
     public function getTotalDays() {
         $createdAt = Carbon::parse($this->created_at);
@@ -45,6 +60,9 @@ class Task extends Model
         $percentage = ($completedDays / $this->getDaysFromStart()) * 100;
 
         return round($percentage, 0);
-    
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class);
     }
 }

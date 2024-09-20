@@ -6,6 +6,7 @@ use App\Livewire\Pages\DeleteTask;
 use App\Livewire\Pages\Dashboard;
 use App\Livewire\Pages\TodoistCallbackPage;
 use App\Livewire\Pages\Welcome;
+use App\Livewire\Pages\Status;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,5 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/status/{id}', Status::class)->name('status');
 
 require __DIR__.'/auth.php';

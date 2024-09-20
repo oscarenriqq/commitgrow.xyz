@@ -1,7 +1,10 @@
 import './bootstrap';
 
-// import Alpine from 'alpinejs'; 'alpinejs';
+import Clipboard from '@ryangjchandler/alpine-clipboard';
 
-// window.Alpine = Alpine;
+import Alpine from 'alpinejs';
 
-// Alpine.start();
+Alpine.plugin(Clipboard);
+
+window.Alpine = Alpine;
+Alpine.start();
