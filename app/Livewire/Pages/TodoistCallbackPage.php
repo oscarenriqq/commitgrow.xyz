@@ -19,18 +19,25 @@ class TodoistCallbackPage extends Component
 
     public function render()
     {
-        $response = Http::post('https://todoist.com/oauth/access_token', [
-            'client_id' => config('app.todoist_client_id'),
-            'client_secret' => config('app.todoist_client_secret'),
-            'code' => $this->code
-        ])->json();
 
-        $currentUser = auth()->user();
+        $accessToken = auth()->user()->todoist_access_token;
 
-        $user = User::where('id', $currentUser->id)->first();
-        $user->todoist_access_token = $response['access_token'];
-        $user->save();
-
-        return view('livewire.pages.todoist-callback-page');
+        if (!isset($accessToken)) {
+            $response = Http::post('https://todoist.com/oauth/access_token', [
+                'client_id' => config('app.todoist_client_id'),
+                'client_secret' => config('app.todoist_client_secret'),
+                'code' => $this->code
+            ])->json();
+    
+            $currentUser = auth()->user();
+    
+            $user = User::where('id', $currentUser->id)->first();
+            $user->todoist_access_token = $response['access_token'];
+            $user->save();
+    
+            return view('livewire.pages.todoist-callback-page');
+        }
+        
+        return $this->redirect(url: '/dashboard', navigate: true);
     }
 }
