@@ -19,7 +19,6 @@ class TodoistCallbackPage extends Component
 
     public function render()
     {
-
         $accessToken = auth()->user()->todoist_access_token;
 
         if (!isset($accessToken)) {
@@ -37,7 +36,7 @@ class TodoistCallbackPage extends Component
     
             return view('livewire.pages.todoist-callback-page');
         }
-        
+
         return $this->redirect(url: '/dashboard', navigate: true);
     }
 }
