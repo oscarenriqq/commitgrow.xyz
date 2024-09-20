@@ -35,7 +35,7 @@ class TodoistCallbackPage extends Component
             $user->todoist_access_token = $response['access_token'];
             $user->save();
     
-            return $this->redirect('todoist-callback');
+            return view('livewire.pages.todoist-callback-page');
         }
         return $this->redirect(url: 'dashboard');
     }
