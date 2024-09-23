@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Http;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Illuminate\Support\Str;
 
 #[Layout('layouts.app')]
 class CreateTask extends Component
@@ -29,13 +30,15 @@ class CreateTask extends Component
 
             Carbon::setLocale('es');
 
+            $uuid = Str::uuid()->toString();
+
             $todoistCreatedTask = Http::withHeaders([
                 'Content-Type' => 'application/json',
                 'Authorization' => 'Bearer ' . auth()->user()->todoist_access_token
             ])
             ->post(config('app.todoist_api_url') . '/tasks', [
                 'content' => $this->name,
-                'description' => $this->description . "\n\n Progreso en: https://www.commitgrow.xyz",
+                'description' => $this->description . "\n\n Sigue tu progreso en: https://www.commitgrow.xyz/status/". $uuid,
                 'due_string' => 'every day starting today ending ' . $this->due_date 
             ])->json();
 
@@ -46,7 +49,8 @@ class CreateTask extends Component
                 'completed'=> false,
                 'task_id' => $todoistCreatedTask['id'],
                 'user_id' => auth()->user()->id,
-                'supervisor' => $this->supervisor ?? null
+                'supervisor' => $this->supervisor ?? null,
+                'uuid' => $uuid
             ]);
 
             //Agregar rachas

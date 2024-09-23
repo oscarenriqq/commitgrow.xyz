@@ -5,7 +5,6 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
 class Task extends Model
 {
@@ -27,14 +26,6 @@ class Task extends Model
     protected $hidden = [
         'uuid'
     ];
-
-    protected static function boot() {
-        parent::boot();
-
-        static::creating(function($model) {
-            $model->uuid = Str::uuid()->toString();
-        });
-    }
 
     public function getTotalDays() {
         $createdAt = Carbon::parse($this->created_at);
