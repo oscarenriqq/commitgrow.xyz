@@ -50,9 +50,9 @@
                 }
             }">
                 Enlace de la tarea: <a class="underline font-bold" href="{{ route('status', ['id' => $task->uuid]) }}"
-                    target="_blank">Visitar</a>
-                <span class="font-bold block cursor-pointer text-blue-500 hover:text-blue-700" x-on:click="copy"
-                    x-text="copied ? `¡Copiado!` : `Copiar enlance`">Copiar
+                    target="_blank">Visitar</a> <br>
+                <span class="font-bold cursor-pointer text-blue-500 hover:text-blue-700" x-on:click="copy"
+                    x-text="copied ? '¡Copiado!' : 'Copiar enlance'">Copiar
                     enlace</span>
             </p>
             <h3 class="font-bold mt-5 mb-2">Tu registro</h3>
