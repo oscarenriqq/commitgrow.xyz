@@ -13,8 +13,8 @@
     </div>
     <div class="mt-5">
         @if (Route::currentRouteName() != 'status')
-            <h3 class="font-bold">Estadísticas</h3>
             @if ($maxStreak > 0)
+                <h3 class="font-bold">Estadísticas</h3>
                 @if ($maxStreak == $streaks->count())
                     <p>¡Tu racha está intacta! </p>
                 @elseif($maxStreak == 1)
