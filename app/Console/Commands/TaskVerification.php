@@ -28,10 +28,14 @@ class TaskVerification extends Command
     public function handle()
     {
         info('Cron job running at '. Carbon::today());
+        
+        $yesterday = Carbon::now()->subDay()->toDateString();
+        
+        
+        info('Date to validate: '. $yesterday);
 
-        $today = Carbon::today()->toDateString();
         Task::where(column: 'completed', operator: 0)
-            ->where(column: 'due_date',operator: $today)
+            ->where(column: 'due_date',operator: $yesterday)
             ->update(['completed' => 1]);
     }
 }
