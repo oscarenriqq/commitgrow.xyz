@@ -38,7 +38,7 @@ class CreateTask extends Component
             ])
             ->post(config('app.todoist_api_url') . '/tasks', [
                 'content' => $this->name,
-                'description' => $this->description . "\n\n Sigue tu progreso en: https://www.commitgrow.xyz/status/". $uuid,
+                'description' => $this->description . "\n\n Sigue tu progreso en: https://commitgrow.oscarmolinar.dev/status/". $uuid,
                 'due_string' => 'every day starting today ending ' . $this->due_date 
             ])->json();
 
