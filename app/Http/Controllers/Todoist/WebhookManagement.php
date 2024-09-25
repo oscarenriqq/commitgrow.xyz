@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 
 class WebhookManagement extends Controller
 {
-    private $today;
+    protected $today;
     public function __construct() {
         $this->today = Carbon::today();
     }
